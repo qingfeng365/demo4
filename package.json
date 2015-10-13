@@ -1,0 +1,19 @@
+{
+  "name": "carshop-demo",
+  "version": "1.0.0",
+  "description": "demo4",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qingfeng365/demo4.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qingfeng365/demo4/issues"
+  },
+  "homepage": "https://github.com/qingfeng365/demo4#readme"
+}

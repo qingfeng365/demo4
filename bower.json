@@ -1,0 +1,23 @@
+{
+  "name": "carshop-demo",
+  "version": "1.0.0",
+  "homepage": "https://github.com/qingfeng365/demo4",
+  "authors": [
+    "qingfengwuyou <h3658686@126.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/bower_components",
+    "test",
+    "tests"
+  ]
+}
