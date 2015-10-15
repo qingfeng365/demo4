@@ -60,7 +60,7 @@ app.get('/car/:id', function(req,res){
             series:"英朗",
             color:"中国红",
             yearStyle:"2015款",
-            modelName:"15N 手动 进取型",
+            carModelName:"15N 手动 进取型",
             ml:"1.5L",
             kw:"84kw",
             gearbox:"6挡 手自一体",
@@ -81,7 +81,7 @@ app.get('/admin/car/list', function(req,res){
             series:"英朗",
             color:"中国红",
             yearStyle:"2015款",
-            modelName:"15N 手动 进取型",
+            carModelName:"15N 手动 进取型",
             ml:"1.5L",
             kw:"84kw",
             gearbox:"6挡 手自一体",
@@ -95,7 +95,7 @@ app.get('/admin/car/list', function(req,res){
             series:"哈弗",
             color:"雅致银",
             yearStyle:"2015款",
-            modelName:"升级版 1.5T 手动 两驱 都市型",
+            carModelName:"升级版 1.5T 手动 两驱 都市型",
             ml:"1.5L",
             kw:"110kw",
             gearbox:"6挡 手动",
@@ -109,7 +109,7 @@ app.get('/admin/car/list', function(req,res){
             series:"速腾",
             color:"雅士银",
             yearStyle:"2015款",
-            modelName:"1.4T 双离合 230TSI 舒适型",
+            carModelName:"1.4T 双离合 230TSI 舒适型",
             ml:"1.4L",
             kw:"96kw",
             gearbox:"7挡 双离合",
@@ -129,7 +129,7 @@ app.get('/admin/car/new', function(req, res) {
       series: "",
       color: "",
       yearStyle: "",
-      modelName: "",
+      carModelName: "",
       ml: "",
       kw: "",
       gearbox: "",
@@ -153,7 +153,7 @@ app.get('/admin/car/update/:id', function(req, res) {
       series: "英朗",
       color: "中国红",
       yearStyle: "2015款",
-      modelName: "15N 手动 进取型",
+      carModelName: "15N 手动 进取型",
       ml: "1.5L",
       kw: "84kw",
       gearbox: "6挡 手自一体",
@@ -167,3 +167,5 @@ app.get('/admin/car/update/:id', function(req, res) {
 app.listen(port);
 
 console.log("汽车商城网站服务已启动,监听端口号:"+port);
+
+app.locals.pretty = true;
