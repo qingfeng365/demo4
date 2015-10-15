@@ -140,6 +140,9 @@ app.get('/admin/car/new', function(req, res) {
   });
 });
 
+
+
+
 app.get('/admin/car/update/:id', function(req, res) {
   res.render('car_admin', {
     title: '汽车商城 后台录入页',
