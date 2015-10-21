@@ -1,3 +1,5 @@
+'use strict';
+
 var mongoose = require('mongoose');
 
 var schemaCar = new mongoose.Schema({
@@ -32,7 +34,7 @@ schemaCar.statics = {
 	fetch: function(cb){
 		return this
 		  .find({})
-		  .sort('meta.createDate')
+		  .sort({'meta.createDate':1})
 		  .exec(cb);
 	},
 	findById: function(id, cb) {
