@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/qingfeng365/demo4/issues"
   },
-  "homepage": "https://github.com/qingfeng365/demo4#readme"
+  "homepage": "https://github.com/qingfeng365/demo4#readme",
+  "dependencies": {
+    "errorhandler": "^1.4.2"
+  }
 }
