@@ -8,6 +8,7 @@ var path = require('path');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/carShop');
+mongoose.set('debug', true);
 var ModelCar = require('./models/car');
 
 var morgan = require('morgan');
@@ -35,8 +36,6 @@ app.get('/', function(req, res, next) {
       cars: cars
     });
   });
-
-
 });
 
 app.get('/car/:id', function(req, res, next) {
@@ -45,6 +44,8 @@ app.get('/car/:id', function(req, res, next) {
     if (err) {
       return next(err);
     }
+    // console.log('detail callback');
+    // console.log(car);
     res.render('car_detail', {
       title: '汽车商城 详情页',
       car: car
@@ -72,7 +73,7 @@ app.get('/admin/car/new', function(req, res) {
   });
 });
 
-app.get('/admin/car/update/:id', function(req, res,next) {
+app.get('/admin/car/update/:id', function(req, res, next) {
   var id = req.params.id;
   ModelCar.findById(id, function(err, car) {
     if (err) {
@@ -85,53 +86,87 @@ app.get('/admin/car/update/:id', function(req, res,next) {
   });
 });
 
-app.post('/admin/car', function(req,res,next){
+app.post('/admin/car', function(req, res, next) {
   var carObj = req.body.car;
-  if(!carObj){
+  if (!carObj) {
     return res.status(400).send('找不到合法数据.');
   }
   var id = carObj._id;
-  if(!id){
+  if (!id) {
     //新增
-    
+
     var docCar = new ModelCar(carObj);
 
-    docCar.save(function(err, _car){
+    docCar.save(function(err, _car) {
       if (err) {
         return next(err);
       }
       return res.redirect('/car/' + _car._id);
-    })
-  }else{
+    });
+  } else {
     //修改
+    // ModelCar.findOneAndUpdate({
+    //     _id: id
+    //   }, carObj)
+    //   .exec(function(err, _car) {
+    //     if (err) {
+    //       return next(err);
+    //     }
+    //     return res.redirect('/car/' + _car._id);
+    //   });
 
-    ModelCar.findByIdAndUpdate(id, carObj, function(err, _car){
-      if (err) {
-        return next(err);
+    ModelCar.findOneAndUpdate({
+        _id: id
+      }, carObj,function(err, _car) {
+        console.log('findOneAndUpdate callback:');
+        console.log(_car);
+        if (err) {
+          return next(err);
+        }
+        return res.redirect('/car/' + _car._id);
       }
-      return res.redirect('/car/' + _car._id);
-    })
+      );
+      // .exec(function(err, _car) {
+      //   console.log('findOneAndUpdate callback:');
+      //   console.log(_car);
+      //   if (err) {
+      //     return next(err);
+      //   }
+      //   return res.redirect('/car/' + _car._id);
+      // });
+
+    // ModelCar.findByIdAndUpdate(id, carObj)
+    //   .exec(function(err, _car) {
+    //     if (err) {
+    //       return next(err);
+    //     }
+    //     return res.redirect('/car/' + _car._id);
+    //   });
   }
 
   // res.sendStatus(200);
-})
+});
 
 // /admin/list?id=xxxxxxx
-app.delete('/admin/list', function(req, res, next){
+app.delete('/admin/list', function(req, res, next) {
   var id = req.query.id;
 
   if (id) {
-    ModelCar.findByIdAndRemove(id, function(err, _car){
-      if(err){
-        res.status(500).json({ok:0});
+    ModelCar.findByIdAndRemove(id, function(err, _car) {
+      if (err) {
+        res.status(500).json({
+          ok: 0
+        });
         return next(err);
-      }else{
-        res.json({ok:1});
+      } else {
+        res.json({
+          ok: 1
+        });
       }
-    })
+    });
   }
 
-})
+});
 
 
 
