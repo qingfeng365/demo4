@@ -2,6 +2,8 @@
 
 var indexController = require('./controllers/index');
 var carController = require('./controllers/car');  
+var userController = require('./controllers/user');  
+
 
 module.exports = function(app) {
 
@@ -15,4 +17,11 @@ module.exports = function(app) {
   app.post('/admin/car', carController.post);
   // /admin/list?id=xxxxxxx
   app.delete('/admin/car/list', carController.del);
+
+  app.get('/signup', userController.showSignup);
+  app.post('/signup', userController.postSignup);
+
+  app.get('/signin', userController.showSignin);
+
+ app.post('/signin', userController.postSignin); 
 };

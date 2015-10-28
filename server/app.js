@@ -29,6 +29,8 @@ app.use(bodyParser.urlencoded({
 var routes = require('./routes');
 routes(app);
 
+app.locals.appTitle = '汽车商城';
+
 app.listen(port);
 
 console.log('汽车商城网站服务已启动,监听端口号:' + port);
