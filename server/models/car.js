@@ -55,6 +55,17 @@ schemaCar.statics = {
         _id: id
       })
       .exec(cb);
+  },
+  getCount:function(cb){
+    return this.count(cb);
+  },
+  findByPage:function(page,size,cb){
+    return this
+    .find({})
+    .sort({'meta.createDate':1})
+    .skip((page-1)*size)
+    .limit(size)
+    .exec(cb);
   }
 };  
 

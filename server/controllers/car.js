@@ -1,5 +1,6 @@
 'use strict';
 var ModelCar = require('../models/car');
+var ModelComment = require('../models/comment');
 var _ = require('underscore');
 
 
@@ -9,23 +10,58 @@ module.exports.showDetail = function(req, res, next) {
     if (err) {
       return next(err);
     }
-    res.render('car_detail', {
-      title: '汽车商城 详情页',
-      car: car
+
+    var carId = car._id;
+
+    ModelComment.fetchByCarId(carId, function(err, comments) {
+      if (err) {
+        return next(err);
+      }
+
+      res.render('car_detail', {
+        title: '汽车商城 详情页',
+        car: car,
+        comments: comments
+      });
+
+
     });
+
+
   });
 };
 
 module.exports.showList = function(req, res, next) {
-  ModelCar.fetch(function(err, cars) {
-    if (err) {
-      return next(err);
-    }
-    res.render('car_list.jade', {
-      title: '汽车商城 列表页',
-      cars: cars
+  var size = 5;
+
+  ModelCar.getCount(function(err, totalsize) {
+    var page = 1;
+    var pagetotal = Math.ceil(totalsize / size);
+    ModelCar.findByPage(page, size, function(err, cars) {
+      if (err) {
+        return next(err);
+      }
+      res.render('car_list.jade', {
+        title: '汽车商城 列表页',
+        cars: cars,
+        page: page,
+        pagetotal: pagetotal
+      });
     });
+
   });
+
+
+
+  // ModelCar.fetch(function(err, cars) {
+  //   if (err) {
+  //     return next(err);
+  //   }
+  //   res.render('car_list.jade', {
+  //     title: '汽车商城 列表页',
+  //     cars: cars
+  //   });
+  // });
 
 };
 
