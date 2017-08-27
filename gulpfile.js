@@ -44,8 +44,8 @@ gulp.task('nodemon', function(cb) {
 
 gulp.task('browser-sync', ['nodemon'], function(done) {
   browserSync({
-    proxy: "localhost:3000", //项目端口 
-    port: 5000,  // 浏览器访问端口
+    proxy: "localhost:3100", //项目端口 
+    port: 5100,  // 浏览器访问端口
     notify: true
   }, done);
 });

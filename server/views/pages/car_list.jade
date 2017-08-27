@@ -3,6 +3,13 @@ extends ../layout
 block content
 	.container
 		.row
+			.col-md-4.m-a
+				form#searchForm(action="/admin/car/list/search",method="POST")
+					.input-group
+						input.form-control(type="text",name="search[text]",placeholder="输入搜索内容...")
+						span.input-group-btn
+							button.btn.btn-secondary(type="submit") 搜索
+		.row
 			table.table.table-hover.table-bordered.table-striped.table-sm
 				thead.thead-default
 					tr
@@ -41,6 +48,16 @@ block content
 			nav
 				ul.pagination
 					- for (var i = 1; i<= pagetotal; i++){
+						- if (i===1){
+							- if(i===page){
+								li.disabled
+										span &laquo;
+							- }else{
+								li
+									a(href="/admin/car/list?page=#{page-1}&pagetotal=#{pagetotal}")
+										span &laquo;
+							- }
+						- }
 						- if(i===page){
 								li.active
 									span #{i}
@@ -48,6 +65,16 @@ block content
 								li
 									a(href="/admin/car/list?page=#{i}&pagetotal=#{pagetotal}") #{i}
 						- }
+						- if (i===pagetotal){
+							- if(i===page){
+								li.disabled
+										span &raquo;
+							- }else{
+								li
+									a(href="/admin/car/list?page=#{page+1}&pagetotal=#{pagetotal}")
+										span &raquo;
+							- }
+						-   }  
 					- }
 	.container
 		#delConfirm.modal.fade

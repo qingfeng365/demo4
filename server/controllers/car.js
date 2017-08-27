@@ -33,10 +33,27 @@ module.exports.showDetail = function(req, res, next) {
 
 module.exports.showList = function(req, res, next) {
   var size = 5;
+  var page = parseInt(req.query.page);
+  var pagetotal = parseInt(req.query.pagetotal);
 
-  ModelCar.getCount(function(err, totalsize) {
-    var page = 1;
-    var pagetotal = Math.ceil(totalsize / size);
+  if (!page) {
+    ModelCar.getCount(function(err, totalsize) {
+      var page = 1;
+      var pagetotal = Math.ceil(totalsize / size);
+      ModelCar.findByPage(page, size, function(err, cars) {
+        if (err) {
+          return next(err);
+        }
+        res.render('car_list.jade', {
+          title: '汽车商城 列表页',
+          cars: cars,
+          page: page,
+          pagetotal: pagetotal
+        });
+      });
+
+    });
+  } else {
     ModelCar.findByPage(page, size, function(err, cars) {
       if (err) {
         return next(err);
@@ -48,8 +65,9 @@ module.exports.showList = function(req, res, next) {
         pagetotal: pagetotal
       });
     });
+  }
 
-  });
+
 
 
 
